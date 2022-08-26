@@ -150,74 +150,52 @@ EXPORT unsigned int __funnelshift_r(unsigned int lo, unsigned int hi,
 EXPORT unsigned int __funnelshift_rc(unsigned int lo, unsigned int hi,
                                      unsigned int shift);
 
-DEFOPENCL1F(acos)
-DEFOPENCL1F(asin)
-DEFOPENCL1F(acosh)
-DEFOPENCL1F(asinh)
-DEFOPENCL1F(atan)
-DEFOPENCL2F(atan2)
-DEFOPENCL1F(atanh)
-DEFOPENCL1F(cbrt)
-DEFOPENCL1F(ceil)
-
-DEFOPENCL2F(copysign)
-
-DEFOPENCL1F(cos)
-DEFOPENCL1F(cosh)
-DEFOPENCL1F(cospi)
+/**********************************************************************/
+// OCML
 
 DEFOPENCL1F(cyl_bessel_i1)
 DEFOPENCL1F(cyl_bessel_i0)
 
-DEFOPENCL1F(erfc)
-DEFOPENCL1F(erf)
 DEFOPENCL1F(erfcinv)
 DEFOPENCL1F(erfcx)
 DEFOPENCL1F(erfinv)
 
-DEFOPENCL1F(exp10)
-DEFOPENCL1F(exp2)
-DEFOPENCL1F(exp)
-DEFOPENCL1F(expm1)
-DEFOPENCL1F(fabs)
-DEFOPENCL2F(fdim)
-DEFOPENCL1F(floor)
-DEFOPENCL2F(floor)
+DEFOPENCL1F(j0)
+DEFOPENCL1F(j1)
 
-EXPORT float fdividef(float x, float y) { return x / y; }
-EXPORT double fdivide(double x, double y) { return x / y; }
-EXPORT float __fmaf_ieee_rd(float x, float y, float z);
-EXPORT float __fmaf_ieee_rn(float x, float y, float z);
-EXPORT float __fmaf_ieee_ru(float x, float y, float z);
-EXPORT float __fmaf_ieee_rz(float x, float y, float z);
+DEFOPENCL3F(norm3d)
+DEFOPENCL4F(norm4d)
+DEFOPENCL1F(normcdf)
+DEFOPENCL1F(normcdfinv)
 
-DEFOPENCL3F(fma)
-
-DEFOPENCL2F(fmax)
-DEFOPENCL2F(fmin)
-DEFOPENCL2F(fmod)
+DEFOPENCL1F(rcbrt)
+DEFOPENCL2F(rhypot)
 
 #if defined(__HIP_DEVICE_COMPILE__)
 extern "C" {
-float NON_OVLD GEN_NAME2(frexp, f)(float f, int *i);
-double NON_OVLD GEN_NAME2(frexp, d)(double f, int *i);
+float NON_OVLD GEN_NAME2(scalbn, f)(float f, int k);
+double NON_OVLD GEN_NAME2(scalbn, d)(double f, int k);
+float NON_OVLD GEN_NAME2(scalb, f)(float x, float y);
+double NON_OVLD GEN_NAME2(scalb, d)(double x, double y);
 }
-EXPORT float frexpf(float f, int *i) { return GEN_NAME2(frexp, f)(f, i); }
-EXPORT double frexp(double f, int *i) { return GEN_NAME2(frexp, d)(f, i); }
+
+EXPORT float scalblnf(float x, long int n) {
+  return (n < INT_MAX) ? GEN_NAME2(scalbn, f)(x, (int)n)
+                       : GEN_NAME2(scalb, f)(x, (float)n);
+}
+EXPORT float scalbnf(float x, int n) { return GEN_NAME2(scalbn, f)(x, n); }
+EXPORT double scalbln(double x, long int n) {
+  return (n < INT_MAX) ? GEN_NAME2(scalbn, d)(x, (int)n)
+                       : GEN_NAME2(scalb, d)(x, (double)n);
+}
+EXPORT double scalbn(double x, int n) { return GEN_NAME2(scalbn, d)(x, n); }
 #else
-EXPORT float frexpf(float f, int *i);
-EXPORT double frexp(double f, int *i);
+EXPORT float scalblnf(float x, long int n);
+EXPORT float scalbnf(float x, int n);
+EXPORT double scalbln(double x, long int n);
+EXPORT double scalbn(double x, int n);
 #endif
 
-DEFOPENCL2F(hypot)
-DEFOPENCL1INT(ilogb)
-
-DEFOPENCL1B(isfinite)
-DEFOPENCL1B(isinf)
-DEFOPENCL1B(isnan)
-
-DEFOPENCL1F(j0)
-DEFOPENCL1F(j1)
 
 EXPORT float jnf(int n, float x) { // TODO: we could use Ahmes multiplication
                                    // and the Miller & Brown algorithm
@@ -259,103 +237,6 @@ EXPORT double jn(int n, double x) { // TODO: we could use Ahmes multiplication
   return x1;
 }
 
-#if defined(__HIP_DEVICE_COMPILE__)
-extern "C" {
-NON_OVLD float GEN_NAME2(ldexp, f)(float f, int k);
-NON_OVLD double GEN_NAME2(ldexp, d)(double f, int k);
-}
-EXPORT float ldexpf(float x, int k) { return GEN_NAME2(ldexp, f)(x, k); }
-EXPORT double ldexp(double x, int k) { return GEN_NAME2(ldexp, d)(x, k); }
-#else
-EXPORT float ldexpf(float x, int k);
-EXPORT double ldexp(double x, int k);
-#endif
-
-DEFOPENCL1F(log10)
-DEFOPENCL1F(log1p)
-DEFOPENCL1F(log2)
-DEFOPENCL1F(logb)
-DEFOPENCL1F(log)
-
-#if defined(__HIP_DEVICE_COMPILE__)
-extern "C" {
-NON_OVLD float GEN_NAME2(modf, f)(float f, float *i);
-NON_OVLD double GEN_NAME2(modf, d)(double f, double *i);
-}
-EXPORT float modff(float f, float *i) { return GEN_NAME2(modf, f)(f, i); }
-EXPORT double modf(double f, double *i) { return GEN_NAME2(modf, d)(f, i); }
-#else
-EXPORT float modff(float f, float *i);
-EXPORT double modf(double f, double *i);
-#endif
-
-DEFOPENCL1F(nearbyint)
-DEFOPENCL2F(nextafter)
-
-DEFOPENCL3F(norm3d)
-DEFOPENCL4F(norm4d)
-DEFOPENCL1F(normcdf)
-DEFOPENCL1F(normcdfinv)
-
-DEFOPENCL2F(pow)
-DEFOPENCL2F(remainder)
-DEFOPENCL1F(rcbrt)
-
-#if defined(__HIP_DEVICE_COMPILE__)
-extern "C" {
-NON_OVLD float GEN_NAME2(remquo, f)(float x, float y, int *quo);
-NON_OVLD double GEN_NAME2(remquo, d)(double x, double y, int *quo);
-}
-EXPORT float remquof(float x, float y, int *quo) {
-  return GEN_NAME2(remquo, f)(x, y, quo);
-}
-EXPORT double remquo(double x, double y, int *quo) {
-  return GEN_NAME2(remquo, d)(x, y, quo);
-}
-#else
-EXPORT float remquof(float x, float y, int *quo);
-EXPORT double remquo(double x, double y, int *quo);
-#endif
-
-DEFOPENCL2F(rhypot)
-
-DEFOPENCL1F(rsqrt)
-
-#if defined(__HIP_DEVICE_COMPILE__)
-extern "C" {
-float NON_OVLD GEN_NAME2(scalbn, f)(float f, int k);
-double NON_OVLD GEN_NAME2(scalbn, d)(double f, int k);
-float NON_OVLD GEN_NAME2(scalb, f)(float x, float y);
-double NON_OVLD GEN_NAME2(scalb, d)(double x, double y);
-}
-
-EXPORT float scalblnf(float x, long int n) {
-  return (n < INT_MAX) ? GEN_NAME2(scalbn, f)(x, (int)n)
-                       : GEN_NAME2(scalb, f)(x, (float)n);
-}
-EXPORT float scalbnf(float x, int n) { return GEN_NAME2(scalbn, f)(x, n); }
-EXPORT double scalbln(double x, long int n) {
-  return (n < INT_MAX) ? GEN_NAME2(scalbn, d)(x, (int)n)
-                       : GEN_NAME2(scalb, d)(x, (double)n);
-}
-EXPORT double scalbn(double x, int n) { return GEN_NAME2(scalbn, d)(x, n); }
-#else
-EXPORT float scalblnf(float x, long int n);
-EXPORT float scalbnf(float x, int n);
-EXPORT double scalbln(double x, long int n);
-EXPORT double scalbn(double x, int n);
-#endif
-
-DEFOPENCL1B(signbit)
-
-DEFOPENCL1F(sin)
-DEFOPENCL1F(sinh)
-DEFOPENCL1F(sinpi)
-DEFOPENCL1F(sqrt)
-DEFOPENCL1F(tan)
-DEFOPENCL1F(tanh)
-DEFOPENCL1F(tgamma)
-DEFOPENCL1F(trunc)
 
 #if defined(__HIP_DEVICE_COMPILE__)
 // float normf ( int dim, const float *a )
@@ -368,7 +249,7 @@ float normf(int dim,
     ++a;
   }
 
-  return GEN_NAME2(sqrt, f)(r);
+  return sqrtf(r);
 }
 
 // float rnormf ( int  dim, const float* t )
@@ -381,7 +262,7 @@ float rnormf(int dim,
     ++a;
   }
 
-  return GEN_NAME2(sqrt, f)(r);
+  return sqrtf(r);
 }
 
 EXPORT
@@ -393,7 +274,7 @@ double norm(int dim,
     ++a;
   }
 
-  return GEN_NAME2(sqrt, d)(r);
+  return sqrt(r);
 }
 
 EXPORT
@@ -405,52 +286,19 @@ double rnorm(int dim,
     ++a;
   }
 
-  return GEN_NAME2(sqrt, d)(r);
+  return sqrt(r);
 }
 
-// sincos
-extern "C" {
-NON_OVLD float GEN_NAME2(sincos, f)(float x, float *cos);
-NON_OVLD double GEN_NAME2(sincos, d)(double x, double *cos);
-}
-EXPORT
-void sincosf(float x, float *sptr, float *cptr) {
-  float tmp;
-  *sptr = GEN_NAME2(sincos, f)(x, &tmp);
-  *cptr = tmp;
-}
-EXPORT
-void sincos(double x, double *sptr, double *cptr) {
-  double tmp;
-  *sptr = GEN_NAME2(sincos, d)(x, &tmp);
-  *cptr = tmp;
-}
-
-// sincospi
-EXPORT
-void sincospif(float x, float *sptr, float *cptr) {
-  *sptr = GEN_NAME2(sinpi, f)(x);
-  *cptr = GEN_NAME2(cospi, f)(x);
-}
-
-EXPORT
-void sincospi(double x, double *sptr, double *cptr) {
-  *sptr = GEN_NAME2(sinpi, d)(x);
-  *cptr = GEN_NAME2(cospi, d)(x);
-}
 #else
 EXPORT float normf(int dim, const float *a);
 EXPORT float rnormf(int dim, const float *a);
 EXPORT double norm(int dim, const double *a);
 EXPORT double rnorm(int dim, const double *a);
-EXPORT void sincosf(float x, float *sptr, float *cptr);
-EXPORT void sincos(double x, double *sptr, double *cptr);
-EXPORT void sincospif(float x, float *sptr, float *cptr);
-EXPORT void sincospi(double x, double *sptr, double *cptr);
 #endif
 
 DEFOPENCL1F(y0)
 DEFOPENCL1F(y1)
+
 EXPORT float ynf(int n, float x) { // TODO: we could use Ahmes multiplication
                                    // and the Miller & Brown algorithm
   //       for linear recurrences to get O(log n) steps, but it's unclear if
@@ -494,18 +342,25 @@ EXPORT double yn(int n, double x) { // TODO: we could use Ahmes multiplication
 
 /**********************************************************************/
 
+EXPORT float fdividef(float x, float y) { return x / y; }
+EXPORT double fdivide(double x, double y) { return x / y; }
+
+// TODO implement
+EXPORT float __fmaf_ieee_rd(float x, float y, float z);
+EXPORT float __fmaf_ieee_rn(float x, float y, float z);
+EXPORT float __fmaf_ieee_ru(float x, float y, float z);
+EXPORT float __fmaf_ieee_rz(float x, float y, float z);
+
 FAKE_ROUNDINGS2(add, x + y)
 FAKE_ROUNDINGS2(sub, x - y)
 FAKE_ROUNDINGS2(div, x / y)
 FAKE_ROUNDINGS2(mul, x *y)
-
 FAKE_ROUNDINGS1(rcp, (1.0f / x))
-FAKE_ROUNDINGS1(sqrt, GEN_NAME2(sqrt, f)(x))
-FAKE_ROUNDINGS1(rsqrt, GEN_NAME2(rsqrt, f)(x))
+FAKE_ROUNDINGS1(sqrt, sqrtf(x))
+FAKE_ROUNDINGS1(rsqrt, rsqrtf(x))
+FAKE_ROUNDINGS3(fma, fmaf(x, y, z))
 
-FAKE_ROUNDINGS3(fma, GEN_NAME2(fma, f)(x, y, z))
-// FAKE_ROUNDINGS3(fmaf_ieee, GEN_NAME2(fmaf_ieee, f)(x, y, z))
-
+// map "__cosf" to opencl "native_cos"
 DEFOPENCL1F_NATIVE(cos)
 DEFOPENCL1F_NATIVE(sin)
 DEFOPENCL1F_NATIVE(tan)
@@ -899,12 +754,6 @@ EXPORT unsigned int __usad(unsigned int x, unsigned int y, unsigned int z) {
 #define CHAR_BIT 8
 #endif
 
-EXPORT float fma(float x, float y, float z) { return fmaf(x, y, z); }
-
-EXPORT api_half fma(api_half x, api_half y, api_half z) {
-  return fma_h(x, y, z);
-}
-
 #pragma push_macro("__DEF_FLOAT_FUN")
 #pragma push_macro("__DEF_FLOAT_FUN2")
 #pragma push_macro("__DEF_FLOAT_FUN2I")
@@ -942,20 +791,14 @@ template <class __T> struct __hip_enable_if<true, __T> { typedef __T type; };
 
 // Define cmath functions with float argument and returns float.
 #define __DEF_FUN1(retty, func)                                                \
-  EXPORT                                                                       \
-  float func(float x) { return func##f(x); }                                   \
   __HIP_OVERLOAD1(retty, func)
 
 // Define cmath functions with float argument and returns retty.
 #define __DEF_FUNI(retty, func)                                                \
-  EXPORT                                                                       \
-  retty func(float x) { return func##f(x); }                                   \
   __HIP_OVERLOAD1(retty, func)
 
 // define cmath functions with two float arguments.
 #define __DEF_FUN2(retty, func)                                                \
-  EXPORT                                                                       \
-  float func(float x, float y) { return func##f(x, y); }                       \
   __HIP_OVERLOAD2(retty, func)
 
 __DEF_FUN1(double, acos)
@@ -1018,16 +861,12 @@ __DEF_FUN1(double, trunc);
   float func(float x, int y) { return func##f(x, y); }
 __DEF_FLOAT_FUN2I(scalbn)
 
-EXPORT float max(float x, float y) { return fmaxf(x, y); }
-
-EXPORT double max(double x, double y) { return fmax(x, y); }
-
-EXPORT float min(float x, float y) { return fminf(x, y); }
-
-EXPORT double min(double x, double y) { return fmin(x, y); }
-
-__HIP_OVERLOAD2(double, max)
-__HIP_OVERLOAD2(double, min)
+//EXPORT float max(float x, float y) { return fmaxf(x, y); }
+//EXPORT double max(double x, double y) { return fmax(x, y); }
+//EXPORT float min(float x, float y) { return fminf(x, y); }
+//EXPORT double min(double x, double y) { return fmin(x, y); }
+//__HIP_OVERLOAD2(double, max)
+//__HIP_OVERLOAD2(double, min)
 
 #pragma pop_macro("__DEF_FLOAT_FUN")
 #pragma pop_macro("__DEF_FLOAT_FUN2")

@@ -125,23 +125,6 @@ double OVLD native_##NAME(double x, double y); \
 EXPORT float CL_NAME2(NAME##_native, f)(float x, float y) { return native_##NAME(x, y); } \
 EXPORT double CL_NAME2(NAME##_native, d)(double x, double y) { return native_##NAME(x, y); }
 
-// +7
-DEF_OPENCL1F(acos)
-DEF_OPENCL1F(asin)
-DEF_OPENCL1F(acosh)
-DEF_OPENCL1F(asinh)
-DEF_OPENCL1F(atan)
-DEF_OPENCL2F(atan2)
-DEF_OPENCL1F(atanh)
-DEF_OPENCL1F(cbrt)
-DEF_OPENCL1F(ceil)
-
-DEF_OPENCL2F(copysign)
-
-DEF_OPENCL1F(cos)
-DEF_OPENCL1F(cosh)
-DEF_OPENCL1F(cospi)
-
 // OCML
 float OVLD i0(float f);
 double OVLD i0(double f);
@@ -152,78 +135,16 @@ double OVLD i1(double f);
 EXPORT float CL_NAME2(cyl_bessel_i1, f)(float x) { return i1(x); }
 EXPORT double CL_NAME2(cyl_bessel_i1, d)(double x) { return i1(x); }
 
-
-DEF_OPENCL1F(erfc)
-DEF_OPENCL1F(erf)
-
 // OCML
 DEFOCML_OPENCL1F(erfcinv)
 DEFOCML_OPENCL1F(erfcx)
 DEFOCML_OPENCL1F(erfinv)
 
-DEF_OPENCL1F(exp10)
-DEF_OPENCL1F(exp2)
-DEF_OPENCL1F(exp)
-DEF_OPENCL1F(expm1)
-DEF_OPENCL1F(fabs)
-DEF_OPENCL2F(fdim)
-DEF_OPENCL1F(floor)
-
-DEF_OPENCL3F(fma)
-
-DEF_OPENCL2F(fmax)
-DEF_OPENCL2F(fmin)
-DEF_OPENCL2F(fmod)
-
-EXPORT float CL_NAME2(frexp, f)(float x, DEFAULT_AS int *i) {
-  int tmp;
-  float ret = frexp(x, &tmp);
-  *i = tmp;
-  return ret;
-}
-EXPORT double CL_NAME2(frexp, d)(double x, DEFAULT_AS int *i) {
-  int tmp;
-  double ret = frexp(x, &tmp);
-  *i = tmp;
-  return ret;
-}
-
-DEF_OPENCL2F(hypot)
-DEF_OPENCL1INT(ilogb)
-
-DEF_OPENCL1B(isfinite)
-DEF_OPENCL1B(isinf)
-DEF_OPENCL1B(isnan)
-
-EXPORT float CL_NAME2(ldexp, f)(float x, int k) { return ldexp(x, k); }
-EXPORT double CL_NAME2(ldexp, d)(double x, int k) { return ldexp(x, k); }
-
-
-DEF_OPENCL1F(log10)
-DEF_OPENCL1F(log1p)
-DEF_OPENCL1F(log2)
-DEF_OPENCL1F(logb)
-DEF_OPENCL1F(log)
-
-EXPORT float CL_NAME2(modf, f)(float x, DEFAULT_AS float *i) {
-  float tmp;
-  float ret = modf(x, &tmp);
-  *i = tmp;
-  return ret;
-}
-EXPORT double CL_NAME2(modf, d)(double x, DEFAULT_AS double *i) {
-  double tmp;
-  double ret = modf(x, &tmp);
-  *i = tmp;
-  return ret;
-}
-
 // OCML
-DEFOCML_OPENCL1F(nearbyint)
-DEFOCML_OPENCL2F(nextafter)
+DEFOCML_OPENCL1F(j0)
+DEFOCML_OPENCL1F(j1)
 
-float OVLD length(float4 f);
-double OVLD length(double4 f);
+// local
 EXPORT float CL_NAME2(norm4d, f)(float x, float y, float z, float w) { float4 temp = (float4)(x, y, z, w); return length(temp); }
 EXPORT double CL_NAME2(norm4d, d)(double x, double y, double z, double w) { double4 temp = (double4)(x, y, z, w); return length(temp); }
 EXPORT float CL_NAME2(norm3d, f)(float x, float y, float z) { float4 temp = (float4)(x, y, z, 0.0f); return length(temp); }
@@ -234,72 +155,23 @@ EXPORT double CL_NAME2(norm3d, d)(double x, double y, double z) { double4 temp =
 DEFOCML_OPENCL1F(normcdf)
 DEFOCML_OPENCL1F(normcdfinv)
 
-DEF_OPENCL2F(pow)
-DEF_OPENCL2F(remainder)
+
 // OCML
 DEFOCML_OPENCL1F(rcbrt)
-
-// remquo
-EXPORT float CL_NAME2(remquo, f)(float x, float y, DEFAULT_AS int *quo) {
-  int tmp;
-  float rem = remquo(x, y, &tmp);
-  *quo = tmp;
-  return rem;
-}
-EXPORT double CL_NAME2(remquo, d)(double x, double y, DEFAULT_AS int *quo) {
-  int tmp;
-  double rem = remquo(x, y, &tmp);
-  *quo = tmp;
-  return rem;
-}
-
-// OCML
 DEFOCML_OPENCL2F(rhypot)
-
-DEF_OPENCL1F(rsqrt)
 
 // OCML
 float OVLD scalbn(float f, int k);
 double OVLD scalbn(double f, int k);
 EXPORT float CL_NAME2(scalbn, f)(float x, int k) { return scalbn(x, k); }
 EXPORT double CL_NAME2(scalbn, d)(double x, int k) { return scalbn(x, k); }
+
 // OCML
 DEFOCML_OPENCL2F(scalb)
-
-DEF_OPENCL1B(signbit)
-
-DEF_OPENCL1F(sin)
-DEF_OPENCL1F(sinh)
-DEF_OPENCL1F(sinpi)
-DEF_OPENCL1F(sqrt)
-DEF_OPENCL1F(tan)
-DEF_OPENCL1F(tanh)
-DEF_OPENCL1F(tgamma)
-DEF_OPENCL1F(trunc)
-
-
-
-// sincos
-EXPORT float CL_NAME2(sincos, f)(float x, DEFAULT_AS float *cos) {
-  float tmp;
-  float sin = sincos(x, &tmp);
-  *cos = tmp;
-  return sin;
-}
-
-EXPORT double CL_NAME2(sincos, d)(double x, DEFAULT_AS double *cos) {
-  double tmp;
-  double sin = sincos(x, &tmp);
-  *cos = tmp;
-  return sin;
-}
 
 // OCML
 DEFOCML_OPENCL1F(y0)
 DEFOCML_OPENCL1F(y1)
-
-DEFOCML_OPENCL1F(j0)
-DEFOCML_OPENCL1F(j1)
 
 /* native */
 
