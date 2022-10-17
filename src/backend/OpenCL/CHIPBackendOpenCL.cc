@@ -604,23 +604,34 @@ void CHIPEventOpenCL::hostSignal() { UNIMPLEMENTED(); }
 
 void CHIPEventOpenCL::increaseRefCount(std::string Reason) {
   std::lock_guard<std::mutex> Lock(EventMtx);
+  assert(this->ClEvent != nullptr);
   auto status = clRetainEvent(this->ClEvent);
   if (!UserEvent_)
     assert(status == 0);
   logDebug("CHIPEventOpenCL::increaseRefCount() {} {} refc {}->{} REASON: {}",
            (void *)this, Msg.c_str(), *Refc_, *Refc_ + 1, Reason);
   (*Refc_)++;
-  assert(*Refc_ = getRefCount() - 1);
-  logDebug("CHIPEventOpenCL::increaseRefCount() {} OpenCL RefCount: {}",
-           (void *)this, getRefCount());
+  logDebug("CHIPEventOpenCL::increaseRefCount() {} CHIP-SPV RefCount {} OpenCL "
+           "RefCount: {}",
+           (void *)this, *Refc_, getRefCount());
+  if (*Refc_ != getRefCount() - 1) {
+    logCritical("CHIP-SPV Refcount not matching OpenCL");
+    std::exit(1);
+  }
 }
 
 void CHIPEventOpenCL::decreaseRefCount(std::string Reason) {
   std::lock_guard<std::mutex> Lock(EventMtx);
-  logDebug("CHIPEventOpenCL::decreaseRefCount() {} OpenCL RefCount: {}",
-           (void *)this, getRefCount());
+  assert(this->ClEvent != nullptr);
+  logDebug("CHIPEventOpenCL::decreaseRefCount() {} CHIP-SPV RefCount {} OpenCL "
+           "RefCount: {}",
+           (void *)this, *Refc_, getRefCount());
   logDebug("CHIPEventOpenCL::decreaseRefCount() {} {} refc {}->{} REASON: {}",
            (void *)this, Msg.c_str(), *Refc_, *Refc_ - 1, Reason);
+  if (*Refc_ != getRefCount() - 1) {
+    logCritical("CHIP-SPV Refcount not matching OpenCL");
+    std::exit(1);
+  }
   if (*Refc_ > 0) {
     (*Refc_)--;
   } else {
@@ -1049,7 +1060,11 @@ CHIPQueueOpenCL::enqueueBarrierImpl(std::vector<CHIPEvent *> *EventsToWaitFor) {
   }
 
   Status = clGetEventInfo(Event->getNativeRef(), CL_EVENT_REFERENCE_COUNT, 4,
-                          &RefCount, NULL);
+                          &RefCount, NULL); 
+  if(Event->ClEvent == nullptr) {
+    logCritical("CHIPQueueOpenCL::enqueueBarrierImpl returning event with ClEvent NULL!");
+    std::exit(1);
+  }
   return Event;
 }
 
