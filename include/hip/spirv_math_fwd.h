@@ -26,6 +26,10 @@ THE SOFTWARE.
 extern "C" {
 #endif
 
+#if defined(__clang__) && defined(__HIP__)
+#define __HIP_CLANG_ONLY__ 1
+#endif
+
 // DOT FUNCTIONS
 #if __HIP_CLANG_ONLY__
 __device__ __attribute__((const)) int __ockl_sdot2(
@@ -49,8 +53,6 @@ __device__ __attribute__((const)) int __ockl_sdot8(int, int, int, bool);
 __device__ __attribute__((const)) unsigned int __ockl_udot8(unsigned int,
                                                             unsigned int,
                                                             unsigned int, bool);
-#endif
-
 #if !__CLANG_HIP_RUNTIME_WRAPPER_INCLUDED__
 // BEGIN FLOAT
 __device__ __attribute__((const)) float __ocml_acos_f32(float);
@@ -314,7 +316,8 @@ __device__ __attribute__((const)) double __llvm_amdgcn_rsq_f64(double) __asm(
 // END INTRINSICS
 // END DOUBLE
 
-#endif  // !__CLANG_HIP_RUNTIME_WRAPPER_INCLUDED__
+#endif // !__CLANG_HIP_RUNTIME_WRAPPER_INCLUDED__
+#endif // __HIP_CLANG_ONLY__
 
 #if defined(__cplusplus)
 }  // extern "C"

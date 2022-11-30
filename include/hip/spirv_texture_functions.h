@@ -26,6 +26,8 @@ THE SOFTWARE.
 #include "spirv_hip_vector_types.h"
 #include "spirv_hip_texture_types.h"
 
+#if defined(__clang__) && defined(__HIP__)
+
 #define __TEXTURE_FUNCTIONS_DECL__ static inline __device__
 
 typedef float NativeFloat2 __attribute__((ext_vector_type(2)));
@@ -327,4 +329,5 @@ DEF_TEXREF(int4, float4);
 DEF_TEXREF(uint4, float4);
 DEF_TEXREF(float4, float4);
 
+#endif // defined(__clang__) && defined(__HIP__)
 #endif

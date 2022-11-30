@@ -28,7 +28,11 @@ THE SOFTWARE.
 #ifndef HIP_INCLUDE_HIP_HCC_DETAIL_HIP_VECTOR_TYPES_H
 #define HIP_INCLUDE_HIP_HCC_DETAIL_HIP_VECTOR_TYPES_H
 
-#define __NATIVE_VECTOR__(n, ...) __attribute__((ext_vector_type(n)))
+#if defined(__has_attribute) && __has_attribute(ext_vector_type)
+#  define __NATIVE_VECTOR__(n, T) T __attribute__((ext_vector_type(n)))
+#else
+#  define __NATIVE_VECTOR__(n, T) T[n]
+#endif
 
 #if defined(__cplusplus)
 #include <type_traits>
@@ -45,7 +49,7 @@ struct HIP_vector_base<T, 1> {
   //
   // When the SPIR-V backend lands on the LLVM we may reintroduce one
   // element vectors.
-  typedef T Native_vec_ /* __NATIVE_VECTOR__(1, T)*/;
+  using Native_vec_ = T /*__NATIVE_VECTOR__(1, T) */;
 
   union {
     Native_vec_ data;
@@ -58,7 +62,7 @@ struct HIP_vector_base<T, 1> {
 
 template <typename T>
 struct HIP_vector_base<T, 2> {
-  typedef T Native_vec_ __NATIVE_VECTOR__(2, T);
+  using Native_vec_ = __NATIVE_VECTOR__(2, T);
 
   union {
     Native_vec_ data;
@@ -72,7 +76,7 @@ struct HIP_vector_base<T, 2> {
 
 template <typename T>
 struct HIP_vector_base<T, 3> {
-  typedef T Native_vec_ __NATIVE_VECTOR__(3, T);
+  using Native_vec_ = __NATIVE_VECTOR__(3, T);
 
   union {
     Native_vec_ data;
@@ -87,7 +91,7 @@ struct HIP_vector_base<T, 3> {
 
 template <typename T>
 struct HIP_vector_base<T, 4> {
-  typedef T Native_vec_ __NATIVE_VECTOR__(4, T);
+  using Native_vec_ = __NATIVE_VECTOR__(4, T);
 
   union {
     Native_vec_ data;
