@@ -55,3 +55,4 @@ add_hipcc_test(TestHipRuntimeHeaderInclude.cpp
   HIPCC_OPTIONS -x c++ -fsyntax-only)
 
 add_hipcc_test(TestStdMathFunctions.hip HIPCC_OPTIONS -c)
+add_hipcc_test(TestHIPMathFunctions.hip HIPCC_OPTIONS -c)
