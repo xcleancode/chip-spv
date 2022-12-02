@@ -178,7 +178,6 @@ DEFOPENCL1F(erfinv)
 DEFOPENCL1F(exp10)
 DEFOPENCL1F(exp2)
 DEFOPENCL1F(exp)
-DEFOPENCL1F(expm1)
 DEFOPENCL1F(fabs)
 DEFOPENCL2F(fdim)
 DEFOPENCL1F(floor)
@@ -271,7 +270,6 @@ EXPORT double ldexp(double x, int k);
 #endif
 
 DEFOPENCL1F(log10)
-DEFOPENCL1F(log1p)
 DEFOPENCL1F(log2)
 DEFOPENCL1F(logb)
 DEFOPENCL1F(log)
@@ -973,7 +971,6 @@ __DEF_FUN1(double, erf)
 __DEF_FUN1(double, erfc)
 __DEF_FUN1(double, exp)
 __DEF_FUN1(double, exp2)
-__DEF_FUN1(double, expm1)
 __DEF_FUN1(double, fabs)
 __DEF_FUN2(double, fdim);
 __DEF_FUN1(double, floor)
@@ -995,7 +992,6 @@ __HIP_OVERLOAD1(bool, isnan);
 __HIP_OVERLOAD2(bool, isunordered);
 __DEF_FUN1(double, log)
 __DEF_FUN1(double, log10)
-__DEF_FUN1(double, log1p)
 __DEF_FUN1(double, log2)
 __DEF_FUN1(double, logb)
 __DEF_FUN1(double, nearbyint);

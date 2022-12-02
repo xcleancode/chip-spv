@@ -26,3 +26,4 @@
 // Check availibility of root namespace functions.
 int RootNSMin(int a, int b) { return ::min(a, b); }
 int RootNSMax(int a, int b) { return ::max(a, b); }
+__host__ __device__ int RootNSLog1pf(float a) { return ::log1pf(a); }

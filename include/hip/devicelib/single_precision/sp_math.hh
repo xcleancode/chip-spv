@@ -35,6 +35,10 @@ extern __device__ float rnorm3df(float a, float b, float c);
 extern __device__ float rnorm4df(float a, float b, float c, float d);
 
 extern __device__ float lgamma(float x);
+
+extern __device__ float expm1(float x);
+
+extern __device__ float log1p(float x);
 }
 
 static inline __device__ float rintf(float x) { return rint(x); }
@@ -51,6 +55,15 @@ static inline __device__ long long int llrintf(float x) { return lrintf(x); }
 static inline __device__ long long int llroundf(float x) { return lroundf(x); }
 
 static inline __device__ float lgammaf(float x) { return (lgamma(x)); };
+
+static inline __device__ float expm1f(float x) { return ::expm1(x); }
+
+static inline __device__ float log1pf(float x) { return ::log1p(x); }
+
+namespace std {
+using ::expm1;
+using ::log1p;
+} // namespace std
 
   // __device__ float acosf(float x)
   // __device__  float acoshf ( float  x )

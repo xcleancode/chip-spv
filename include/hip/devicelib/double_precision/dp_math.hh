@@ -35,6 +35,10 @@ extern __device__ double rnorm3d(double a, double b, double c);
 extern __device__ double rnorm4d(double a, double b, double c, double d);
 
 extern __device__ double lgamma(double x);
+
+extern __device__ double expm1(double x);
+
+extern __device__ double log1p(double x);
 }
 
 static inline __device__ long int lrint(double x) {
@@ -46,6 +50,11 @@ static inline __device__ long int lround(double x) {
 
 static inline __device__ long long int llrint(double x) { return lrint(x); }
 static inline __device__ long long int llround(double x) { return lround(x); }
+
+namespace std {
+using ::expm1;
+using ::log1p;
+} // namespace std
 
 // __device__ double acos(double x)
 // __device__​ double acosh ( double  x )

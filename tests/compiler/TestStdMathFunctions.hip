@@ -26,6 +26,14 @@ template <class T> __global__ void callStdAbsKernel(T *Data) {
   *Data = std::abs(*Data);
 }
 
+template <class T> __global__ void callStdExpm1Kernel(T *Data) {
+  *Data = std::expm1(*Data);
+}
+
+template <class T> __global__ void callStdLog1pKernel(T *Data) {
+  *Data = std::log1p(*Data);
+}
+
 bool *b;
 signed char *sc;
 unsigned char *uc;
@@ -33,8 +41,10 @@ signed short *ss;
 unsigned short *us;
 signed int *si;
 signed long *sl;
+float *f;
+double *d;
 
-void test() {
+void testAbs() {
   callStdAbsKernel<<<1, 1>>>(sc);
   callStdAbsKernel<<<1, 1>>>(ss);
   callStdAbsKernel<<<1, 1>>>(si);
@@ -45,4 +55,15 @@ void test() {
   callStdAbsKernel<<<1, 1>>>(b);
   callStdAbsKernel<<<1, 1>>>(uc);
   callStdAbsKernel<<<1, 1>>>(us);
+
+}
+
+void testExpm1() {
+  callStdExpm1Kernel<float><<<1, 1>>>(f);
+  callStdExpm1Kernel<double><<<1, 1>>>(d);
+}
+
+void testLog1p() {
+  callStdLog1pKernel<float><<<1, 1>>>(f);
+  callStdLog1pKernel<double><<<1, 1>>>(d);
 }
