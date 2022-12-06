@@ -52,6 +52,7 @@ add_cuda_sample(cuda-simplePrintf 0_Simple/simplePrintf  simplePrintf.cu)
 add_cuda_sample(cuda-simpleAtomicIntrinsics 0_Simple/simpleAtomicIntrinsics  simpleAtomicIntrinsics_cpu.cpp  simpleAtomicIntrinsics.cu)
 add_cuda_sample(cuda-simpleTemplates 0_Simple/simpleTemplates  simpleTemplates.cu)
 add_cuda_sample(cuda-simpleCallback 0_Simple/simpleCallback  multithreading.cpp   simpleCallback.cu)
+add_cuda_sample(cuda-mallocManaged 0_Simple/uvm  cudaMallocManaged.cu)
 
 ############################
 ## 1_Utilities
@@ -159,4 +160,3 @@ if(ENABLE_UNCOMPILABLE_TESTS)
   add_cuda_sample(cuda-transpose 6_Advanced/transpose transpose.cu)
 
 endif()
-
