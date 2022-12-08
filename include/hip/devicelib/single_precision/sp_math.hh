@@ -39,6 +39,8 @@ extern __device__ float lgamma(float x);
 extern __device__ float expm1(float x);
 
 extern __device__ float log1p(float x);
+
+extern __device__ float trunc(float x);
 }
 
 static inline __device__ float rintf(float x) { return rint(x); }
@@ -60,9 +62,12 @@ static inline __device__ float expm1f(float x) { return ::expm1(x); }
 
 static inline __device__ float log1pf(float x) { return ::log1p(x); }
 
+static inline __device__ float truncf(float x) { return ::trunc(x); }
+
 namespace std {
 using ::expm1;
 using ::log1p;
+using ::trunc;
 } // namespace std
 
   // __device__ float acosf(float x)

@@ -29,11 +29,12 @@
 extern "C++" {
 
 extern __device__ api_half2 rint(api_half2 x);
+extern __device__ api_half2 trunc(api_half2 x);
 
 }
 
 static inline __device__ api_half2 rint_2h(api_half2 x) { return rint(x); }
-
+static inline __device__ api_half2 trunc_2h(api_half2 x) { return trunc(x); }
 
 //__device__ __half2 h2ceil ( const __half2 h )
 //__device__ __half2 h2cos ( const __half2 a )

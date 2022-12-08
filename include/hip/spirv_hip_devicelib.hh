@@ -352,7 +352,6 @@ DEFOPENCL1F(sqrt)
 DEFOPENCL1F(tan)
 DEFOPENCL1F(tanh)
 DEFOPENCL1F(tgamma)
-DEFOPENCL1F(trunc)
 
 #if defined(__HIP_DEVICE_COMPILE__)
 // float normf ( int dim, const float *a )
@@ -1005,7 +1004,6 @@ __DEF_FUN1(double, sqrt)
 __DEF_FUN1(double, tan)
 __DEF_FUN1(double, tanh)
 __DEF_FUN1(double, tgamma)
-__DEF_FUN1(double, trunc);
 
 // define cmath functions with a float and an integer argument.
 #define __DEF_FLOAT_FUN2I(func)                                                \
