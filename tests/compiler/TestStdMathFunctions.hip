@@ -34,6 +34,10 @@ template <class T> __global__ void callStdLog1pKernel(T *Data) {
   *Data = std::log1p(*Data);
 }
 
+template <class T> __global__ void callStdTruncKernel(T *Data) {
+  *Data = std::trunc(*Data);
+}
+
 bool *b;
 signed char *sc;
 unsigned char *uc;
@@ -66,4 +70,9 @@ void testExpm1() {
 void testLog1p() {
   callStdLog1pKernel<float><<<1, 1>>>(f);
   callStdLog1pKernel<double><<<1, 1>>>(d);
+}
+
+void testTrunc() {
+  callStdTruncKernel<float><<<1, 1>>>(f);
+  callStdTruncKernel<double><<<1, 1>>>(d);
 }
