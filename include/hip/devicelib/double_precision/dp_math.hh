@@ -41,6 +41,9 @@ extern __device__ double expm1(double x);
 extern __device__ double log1p(double x);
 
 extern __device__ double trunc(double x);
+
+extern __device__ double sin(double x);
+extern __device__ double cos(double x);
 }
 
 static inline __device__ long int lrint(double x) {
@@ -57,7 +60,9 @@ namespace std {
 using ::expm1;
 using ::log1p;
 using ::trunc;
-} // namespace std
+using ::sin;
+using ::cos;
+}
 
 // __device__ double acos(double x)
 // __device__​ double acosh ( double  x )

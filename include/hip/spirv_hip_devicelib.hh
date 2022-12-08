@@ -162,7 +162,6 @@ DEFOPENCL1F(ceil)
 
 DEFOPENCL2F(copysign)
 
-DEFOPENCL1F(cos)
 DEFOPENCL1F(cosh)
 DEFOPENCL1F(cospi)
 
@@ -345,7 +344,6 @@ EXPORT double scalbn(double x, int n);
 
 DEFOPENCL1B(signbit)
 
-DEFOPENCL1F(sin)
 DEFOPENCL1F(sinh)
 DEFOPENCL1F(sinpi)
 DEFOPENCL1F(sqrt)
@@ -502,8 +500,6 @@ FAKE_ROUNDINGS1(rsqrt, GEN_NAME2(rsqrt, f)(x))
 FAKE_ROUNDINGS3(fma, GEN_NAME2(fma, f)(x, y, z))
 // FAKE_ROUNDINGS3(fmaf_ieee, GEN_NAME2(fmaf_ieee, f)(x, y, z))
 
-DEFOPENCL1F_NATIVE(cos)
-DEFOPENCL1F_NATIVE(sin)
 DEFOPENCL1F_NATIVE(tan)
 
 DEFOPENCL1F_NATIVE(exp10)
@@ -528,8 +524,8 @@ EXPORT float __saturatef(float x) {
 }
 
 EXPORT void __sincosf(float x, float *sptr, float *cptr) {
-  *sptr = GEN_NAME2(sin_native, f)(x);
-  *cptr = GEN_NAME2(cos_native, f)(x);
+  *sptr = sin(x);
+  *cptr = cos(x);
 }
 
 /**********************************************************************/
@@ -964,7 +960,6 @@ __DEF_FUN1(double, atanh)
 __DEF_FUN1(double, cbrt)
 __DEF_FUN1(double, ceil)
 __DEF_FUN2(double, copysign);
-__DEF_FUN1(double, cos)
 __DEF_FUN1(double, cosh)
 __DEF_FUN1(double, erf)
 __DEF_FUN1(double, erfc)
@@ -998,7 +993,6 @@ __DEF_FUN2(double, nextafter);
 __DEF_FUN2(double, pow);
 __DEF_FUN2(double, remainder);
 __HIP_OVERLOAD1(bool, signbit)
-__DEF_FUN1(double, sin)
 __DEF_FUN1(double, sinh)
 __DEF_FUN1(double, sqrt)
 __DEF_FUN1(double, tan)

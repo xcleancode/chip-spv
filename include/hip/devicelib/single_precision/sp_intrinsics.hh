@@ -24,6 +24,10 @@
 #define HIP_INCLUDE_DEVICELIB_SP_INTRINSICS_H
 
 #include <hip/devicelib/macros.hh>
+#include <hip/devicelib/single_precision/sp_math.hh>
+
+static inline __device__ float __sinf(float x) { return ::sin(x); }
+static inline __device__ float __cosf(float x) { return ::cos(x); }
 
 // __device__​ float __cosf ( float  x )
 // __device__​ float __exp10f ( float  x )
