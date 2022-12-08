@@ -38,6 +38,14 @@ template <class T> __global__ void callStdTruncKernel(T *Data) {
   *Data = std::trunc(*Data);
 }
 
+template <class T> __global__ void callStdSinKernel(T *Data) {
+  *Data = std::sin(*Data);
+}
+
+template <class T> __global__ void callStdCosKernel(T *Data) {
+  *Data = std::cos(*Data);
+}
+
 bool *b;
 signed char *sc;
 unsigned char *uc;
@@ -75,4 +83,14 @@ void testLog1p() {
 void testTrunc() {
   callStdTruncKernel<float><<<1, 1>>>(f);
   callStdTruncKernel<double><<<1, 1>>>(d);
+}
+
+void testSin() {
+  callStdSinKernel<float><<<1, 1>>>(f);
+  callStdSinKernel<double><<<1, 1>>>(d);
+}
+
+void testCos() {
+  callStdCosKernel<float><<<1, 1>>>(f);
+  callStdCosKernel<double><<<1, 1>>>(d);
 }
