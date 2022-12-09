@@ -52,6 +52,10 @@ template <class T> __global__ void callStdCosKernel(T *Data) {
 DEF_UNARY_OP_KERNEL(callStdAcosKernel, std::acos);
 DEF_UNARY_OP_KERNEL(callStdAsinKernel, std::asin);
 DEF_UNARY_OP_KERNEL(callStdAtanKernel, std::atan);
+DEF_UNARY_OP_KERNEL(callStdCeilKernel, std::ceil);
+DEF_UNARY_OP_KERNEL(callStdCeilfKernel, std::ceilf);
+DEF_UNARY_OP_KERNEL(callStdFloorKernel, std::floor);
+DEF_UNARY_OP_KERNEL(callStdFloorfKernel, std::floorf);
 
 bool *b;
 signed char *sc;
@@ -118,4 +122,18 @@ void testAtan() {
   callStdAtanKernel<int><<<1, 1>>>(si);
   callStdAtanKernel<float><<<1, 1>>>(f);
   callStdAtanKernel<double><<<1, 1>>>(d);
+}
+
+void testCeil() {
+  callStdCeilKernel<int><<<1, 1>>>(si);
+  callStdCeilKernel<float><<<1, 1>>>(f);
+  callStdCeilfKernel<float><<<1, 1>>>(f);
+  callStdCeilKernel<double><<<1, 1>>>(d);
+}
+
+void testFloor() {
+  callStdFloorKernel<int><<<1, 1>>>(si);
+  callStdFloorKernel<float><<<1, 1>>>(f);
+  callStdFloorfKernel<float><<<1, 1>>>(f);
+  callStdFloorKernel<double><<<1, 1>>>(d);
 }
