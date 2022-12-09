@@ -155,7 +155,6 @@ DEFOPENCL1F(asinh)
 DEFOPENCL2F(atan2)
 DEFOPENCL1F(atanh)
 DEFOPENCL1F(cbrt)
-DEFOPENCL1F(ceil)
 
 DEFOPENCL2F(copysign)
 
@@ -176,7 +175,6 @@ DEFOPENCL1F(exp2)
 DEFOPENCL1F(exp)
 DEFOPENCL1F(fabs)
 DEFOPENCL2F(fdim)
-DEFOPENCL1F(floor)
 
 EXPORT float fdividef(float x, float y) { return x / y; }
 EXPORT double fdivide(double x, double y) { return x / y; }
@@ -955,7 +953,7 @@ __HIP_OVERLOAD1(double, atan)
 __DEF_FUN2(double, atan2);
 __DEF_FUN1(double, atanh)
 __DEF_FUN1(double, cbrt)
-__DEF_FUN1(double, ceil)
+__HIP_OVERLOAD1(double, ceil)
 __DEF_FUN2(double, copysign);
 __DEF_FUN1(double, cosh)
 __DEF_FUN1(double, erf)
@@ -964,7 +962,7 @@ __DEF_FUN1(double, exp)
 __DEF_FUN1(double, exp2)
 __DEF_FUN1(double, fabs)
 __DEF_FUN2(double, fdim);
-__DEF_FUN1(double, floor)
+__HIP_OVERLOAD1(double, floor)
 __DEF_FUN2(double, fmax);
 __DEF_FUN2(double, fmin);
 __DEF_FUN2(double, fmod);

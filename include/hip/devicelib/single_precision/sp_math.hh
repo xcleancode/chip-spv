@@ -40,6 +40,8 @@ extern __device__ float expm1(float x);
 
 extern __device__ float log1p(float x);
 
+extern __device__ float ceil(float x);
+extern __device__ float floor(float x);
 extern __device__ float trunc(float x);
 
 extern __device__ float sin(float x);
@@ -68,6 +70,8 @@ static inline __device__ float expm1f(float x) { return ::expm1(x); }
 
 static inline __device__ float log1pf(float x) { return ::log1p(x); }
 
+static inline __device__ float ceilf(float x) { return ::ceil(x); }
+static inline __device__ float floorf(float x) { return ::floor(x); }
 static inline __device__ float truncf(float x) { return ::trunc(x); }
 
 static inline __device__ float sinf(float x) { return ::sin(x); }
@@ -79,6 +83,10 @@ static inline __device__ float atanf(float x) { return ::atan(x); }
 namespace std {
 using ::expm1;
 using ::log1p;
+using ::ceil;
+using ::ceilf;
+using ::floor;
+using ::floorf;
 using ::trunc;
 using ::sin;
 using ::cos;

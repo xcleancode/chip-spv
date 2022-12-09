@@ -31,6 +31,8 @@ extern "C++" {
 
 extern __device__ api_half rint(api_half x);
 
+extern __device__ api_half ceil(api_half x);
+extern __device__ api_half floor(api_half x);
 extern __device__ api_half trunc(api_half x);
 
 extern __device__ api_half sin(api_half x);
@@ -38,6 +40,8 @@ extern __device__ api_half cos(api_half x);
 }
 
 static inline __device__ api_half rint_h(api_half x) { return rint(x); }
+static inline __device__ api_half ceil_h(api_half x) { return floor(x); }
+static inline __device__ api_half floor_h(api_half x) { return ceil(x); }
 static inline __device__ api_half trunc_h(api_half x) { return trunc(x); }
 
 static inline __device__ api_half sin_h(api_half x) { return sin(x); }

@@ -40,6 +40,8 @@ extern __device__ double expm1(double x);
 
 extern __device__ double log1p(double x);
 
+extern __device__ double ceil(double x);
+extern __device__ double floor(double x);
 extern __device__ double trunc(double x);
 
 extern __device__ double sin(double x);
@@ -62,6 +64,8 @@ static inline __device__ long long int llround(double x) { return lround(x); }
 namespace std {
 using ::expm1;
 using ::log1p;
+using ::ceil;
+using ::floor;
 using ::trunc;
 using ::sin;
 using ::cos;
