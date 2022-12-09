@@ -44,6 +44,9 @@ extern __device__ double trunc(double x);
 
 extern __device__ double sin(double x);
 extern __device__ double cos(double x);
+extern __device__ double asin(double x);
+extern __device__ double acos(double x);
+extern __device__ double atan(double x);
 }
 
 static inline __device__ long int lrint(double x) {
@@ -62,6 +65,9 @@ using ::log1p;
 using ::trunc;
 using ::sin;
 using ::cos;
+using ::asin;
+using ::acos;
+using ::atan;
 }
 
 // __device__ double acos(double x)

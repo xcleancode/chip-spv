@@ -44,6 +44,9 @@ extern __device__ float trunc(float x);
 
 extern __device__ float sin(float x);
 extern __device__ float cos(float x);
+extern __device__ float asin(float x);
+extern __device__ float acos(float x);
+extern __device__ float atan(float x);
 }
 
 static inline __device__ float rintf(float x) { return rint(x); }
@@ -69,6 +72,9 @@ static inline __device__ float truncf(float x) { return ::trunc(x); }
 
 static inline __device__ float sinf(float x) { return ::sin(x); }
 static inline __device__ float cosf(float x) { return ::cos(x); }
+static inline __device__ float asinf(float x) { return ::asin(x); }
+static inline __device__ float acosf(float x) { return ::acos(x); }
+static inline __device__ float atanf(float x) { return ::atan(x); }
 
 namespace std {
 using ::expm1;
@@ -76,6 +82,9 @@ using ::log1p;
 using ::trunc;
 using ::sin;
 using ::cos;
+using ::asin;
+using ::acos;
+using ::atan;
 } // namespace std
 
   // __device__ float acosf(float x)

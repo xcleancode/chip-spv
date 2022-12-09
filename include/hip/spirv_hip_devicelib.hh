@@ -150,11 +150,8 @@ EXPORT unsigned int __funnelshift_r(unsigned int lo, unsigned int hi,
 EXPORT unsigned int __funnelshift_rc(unsigned int lo, unsigned int hi,
                                      unsigned int shift);
 
-DEFOPENCL1F(acos)
-DEFOPENCL1F(asin)
 DEFOPENCL1F(acosh)
 DEFOPENCL1F(asinh)
-DEFOPENCL1F(atan)
 DEFOPENCL2F(atan2)
 DEFOPENCL1F(atanh)
 DEFOPENCL1F(cbrt)
@@ -950,11 +947,11 @@ template <class __T> struct __hip_enable_if<true, __T> { typedef __T type; };
   float func(float x, float y) { return func##f(x, y); }                       \
   __HIP_OVERLOAD2(retty, func)
 
-__DEF_FUN1(double, acos)
+__HIP_OVERLOAD1(double, acos)
 __DEF_FUN1(double, acosh)
-__DEF_FUN1(double, asin)
+__HIP_OVERLOAD1(double, asin)
 __DEF_FUN1(double, asinh)
-__DEF_FUN1(double, atan)
+__HIP_OVERLOAD1(double, atan)
 __DEF_FUN2(double, atan2);
 __DEF_FUN1(double, atanh)
 __DEF_FUN1(double, cbrt)
