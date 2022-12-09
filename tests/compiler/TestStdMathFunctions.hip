@@ -46,14 +46,21 @@ template <class T> __global__ void callStdCosKernel(T *Data) {
   *Data = std::cos(*Data);
 }
 
+#define DEF_UNARY_OP_KERNEL(NAME, OP)                                          \
+  template <class T> __global__ void NAME(T *Data) { *Data = OP(*Data); }
+
+DEF_UNARY_OP_KERNEL(callStdAcosKernel, std::acos);
+DEF_UNARY_OP_KERNEL(callStdAsinKernel, std::asin);
+DEF_UNARY_OP_KERNEL(callStdAtanKernel, std::atan);
+
 bool *b;
 signed char *sc;
 unsigned char *uc;
 signed short *ss;
 unsigned short *us;
-signed int *si;
+signed int *si, *si2;
 signed long *sl;
-float *f;
+float *f, *f2;
 double *d;
 
 void testAbs() {
@@ -93,4 +100,22 @@ void testSin() {
 void testCos() {
   callStdCosKernel<float><<<1, 1>>>(f);
   callStdCosKernel<double><<<1, 1>>>(d);
+}
+
+void testAcos() {
+  callStdAcosKernel<int><<<1, 1>>>(si);
+  callStdAcosKernel<float><<<1, 1>>>(f);
+  callStdAcosKernel<double><<<1, 1>>>(d);
+}
+
+void testAsin() {
+  callStdAsinKernel<int><<<1, 1>>>(si);
+  callStdAsinKernel<float><<<1, 1>>>(f);
+  callStdAsinKernel<double><<<1, 1>>>(d);
+}
+
+void testAtan() {
+  callStdAtanKernel<int><<<1, 1>>>(si);
+  callStdAtanKernel<float><<<1, 1>>>(f);
+  callStdAtanKernel<double><<<1, 1>>>(d);
 }
