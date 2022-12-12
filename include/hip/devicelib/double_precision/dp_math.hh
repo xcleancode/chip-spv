@@ -36,6 +36,9 @@ extern __device__ double rnorm4d(double a, double b, double c, double d);
 
 extern __device__ double lgamma(double x);
 
+extern __device__ double erf(double x);
+extern __device__ double ercf(double x);
+
 extern __device__ double expm1(double x);
 
 extern __device__ double log(double x);
@@ -65,6 +68,8 @@ static inline __device__ long long int llrint(double x) { return lrint(x); }
 static inline __device__ long long int llround(double x) { return lround(x); }
 
 namespace std {
+using ::erf;
+using ::erfc;
 using ::expm1;
 using ::log;
 using ::log2;
