@@ -62,6 +62,10 @@ DEF_UNARY_OP_KERNEL(callStdLog2Kernel, std::log2);
 DEF_UNARY_OP_KERNEL(callStdLog2fKernel, std::log2f);
 DEF_UNARY_OP_KERNEL(callStdLog10Kernel, std::log10);
 DEF_UNARY_OP_KERNEL(callStdLog10fKernel, std::log10f);
+DEF_UNARY_OP_KERNEL(callStdErfKernel, std::erf);
+DEF_UNARY_OP_KERNEL(callStdErffKernel, std::erff);
+DEF_UNARY_OP_KERNEL(callStdErfcKernel, std::erfc);
+DEF_UNARY_OP_KERNEL(callStdErfcfKernel, std::erfcf);
 
 bool *b;
 signed char *sc;
@@ -165,4 +169,16 @@ void testLog10() {
   callStdLog10Kernel<double><<<1, 1>>>(d);
 }
 
+void testErf() {
+  callStdErfKernel<int><<<1, 1>>>(si);
+  callStdErfKernel<float><<<1, 1>>>(f);
+  callStdErffKernel<float><<<1, 1>>>(f);
+  callStdErfKernel<double><<<1, 1>>>(d);
+}
+
+void testErfc() {
+  callStdErfcKernel<int><<<1, 1>>>(si);
+  callStdErfcKernel<float><<<1, 1>>>(f);
+  callStdErfcfKernel<float><<<1, 1>>>(f);
+  callStdErfcKernel<double><<<1, 1>>>(d);
 }
