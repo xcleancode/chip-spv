@@ -94,6 +94,7 @@ using ::sinh;
 using ::cosh;
 using ::tanh;
 using ::sqrt;
+using ::lgamma;
 }
 
 // __device__ double acos(double x)

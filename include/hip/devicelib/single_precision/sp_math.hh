@@ -137,6 +137,8 @@ using ::tanh;
 using ::tanhf;
 using ::sqrt;
 using ::sqrtf;
+using ::lgamma;
+using ::lgammaf;
 } // namespace std
 
   // __device__ float acosf(float x)
