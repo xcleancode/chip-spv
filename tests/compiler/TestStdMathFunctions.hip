@@ -56,6 +56,12 @@ DEF_UNARY_OP_KERNEL(callStdCeilKernel, std::ceil);
 DEF_UNARY_OP_KERNEL(callStdCeilfKernel, std::ceilf);
 DEF_UNARY_OP_KERNEL(callStdFloorKernel, std::floor);
 DEF_UNARY_OP_KERNEL(callStdFloorfKernel, std::floorf);
+DEF_UNARY_OP_KERNEL(callStdLogKernel, std::log);
+DEF_UNARY_OP_KERNEL(callStdLogfKernel, std::logf);
+DEF_UNARY_OP_KERNEL(callStdLog2Kernel, std::log2);
+DEF_UNARY_OP_KERNEL(callStdLog2fKernel, std::log2f);
+DEF_UNARY_OP_KERNEL(callStdLog10Kernel, std::log10);
+DEF_UNARY_OP_KERNEL(callStdLog10fKernel, std::log10f);
 
 bool *b;
 signed char *sc;
@@ -136,4 +142,27 @@ void testFloor() {
   callStdFloorKernel<float><<<1, 1>>>(f);
   callStdFloorfKernel<float><<<1, 1>>>(f);
   callStdFloorKernel<double><<<1, 1>>>(d);
+}
+
+void testLog() {
+  callStdLogKernel<int><<<1, 1>>>(si);
+  callStdLogKernel<float><<<1, 1>>>(f);
+  callStdLogfKernel<float><<<1, 1>>>(f);
+  callStdLogKernel<double><<<1, 1>>>(d);
+}
+
+void testLog2() {
+  callStdLog2Kernel<int><<<1, 1>>>(si);
+  callStdLog2Kernel<float><<<1, 1>>>(f);
+  callStdLog2fKernel<float><<<1, 1>>>(f);
+  callStdLog2Kernel<double><<<1, 1>>>(d);
+}
+
+void testLog10() {
+  callStdLog10Kernel<int><<<1, 1>>>(si);
+  callStdLog10Kernel<float><<<1, 1>>>(f);
+  callStdLog10fKernel<float><<<1, 1>>>(f);
+  callStdLog10Kernel<double><<<1, 1>>>(d);
+}
+
 }
