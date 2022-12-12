@@ -59,6 +59,8 @@ extern __device__ float atan(float x);
 extern __device__ float sinh(float x);
 extern __device__ float cosh(float x);
 extern __device__ float tanh(float x);
+
+extern __device__ float sqrt(float x);
 }
 
 static inline __device__ float rintf(float x) { return rint(x); }
@@ -100,6 +102,8 @@ static inline __device__ float sinhf(float x) { return ::sinh(x); }
 static inline __device__ float coshf(float x) { return ::cosh(x); }
 static inline __device__ float tanhf(float x) { return ::tanh(x); }
 
+static inline __device__ float sqrtf(float x) { return ::sqrt(x); }
+
 namespace std {
 using ::erf;
 using ::erff;
@@ -131,6 +135,8 @@ using ::cosh;
 using ::coshf;
 using ::tanh;
 using ::tanhf;
+using ::sqrt;
+using ::sqrtf;
 } // namespace std
 
   // __device__ float acosf(float x)

@@ -41,6 +41,8 @@ extern __device__ api_half trunc(api_half x);
 
 extern __device__ api_half sin(api_half x);
 extern __device__ api_half cos(api_half x);
+
+extern __device__ api_half sqrt(api_half x);
 }
 
 static inline __device__ api_half rint_h(api_half x) { return rint(x); }
@@ -53,6 +55,8 @@ static inline __device__ api_half trunc_h(api_half x) { return trunc(x); }
 
 static inline __device__ api_half sin_h(api_half x) { return sin(x); }
 static inline __device__ api_half cos_h(api_half x) { return cos(x); }
+
+static inline __device__ api_half sqrt_h(api_half x) { return ::sqrt(x); }
 
 //__device__ __half hceil ( const __half h )
 //__device__ __half hcos ( const __half a )

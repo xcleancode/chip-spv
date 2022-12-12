@@ -38,6 +38,8 @@ extern __device__ api_half2 trunc(api_half2 x);
 
 extern __device__ api_half2 sin(api_half2 x);
 extern __device__ api_half2 cos(api_half2 x);
+
+extern __device__ api_half2 sqrt(api_half2 x);
 }
 
 static inline __device__ api_half2 rint_2h(api_half2 x) { return rint(x); }
@@ -50,6 +52,8 @@ static inline __device__ api_half2 trunc_2h(api_half2 x) { return trunc(x); }
 
 static inline __device__ api_half2 sin_2h(api_half2 x) { return sin(x); }
 static inline __device__ api_half2 cos_2h(api_half2 x) { return cos(x); }
+
+static inline __device__ api_half2 sqrt_2h(api_half2 x) { return ::sqrt(x); }
 
 //__device__ __half2 h2ceil ( const __half2 h )
 //__device__ __half2 h2cos ( const __half2 a )

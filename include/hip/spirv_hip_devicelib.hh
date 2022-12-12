@@ -334,7 +334,6 @@ EXPORT double scalbn(double x, int n);
 DEFOPENCL1B(signbit)
 
 DEFOPENCL1F(sinpi)
-DEFOPENCL1F(sqrt)
 DEFOPENCL1F(tgamma)
 
 #if defined(__HIP_DEVICE_COMPILE__)
@@ -348,7 +347,7 @@ float normf(int dim,
     ++a;
   }
 
-  return GEN_NAME2(sqrt, f)(r);
+  return ::sqrtf(r);
 }
 
 // float rnormf ( int  dim, const float* t )
@@ -361,7 +360,7 @@ float rnormf(int dim,
     ++a;
   }
 
-  return GEN_NAME2(sqrt, f)(r);
+  return ::sqrtf(r);
 }
 
 EXPORT
@@ -373,7 +372,7 @@ double norm(int dim,
     ++a;
   }
 
-  return GEN_NAME2(sqrt, d)(r);
+  return ::sqrt(r);
 }
 
 EXPORT
@@ -385,7 +384,7 @@ double rnorm(int dim,
     ++a;
   }
 
-  return GEN_NAME2(sqrt, d)(r);
+  return ::sqrt(r);
 }
 
 // sincos
@@ -480,7 +479,7 @@ FAKE_ROUNDINGS2(div, x / y)
 FAKE_ROUNDINGS2(mul, x *y)
 
 FAKE_ROUNDINGS1(rcp, (1.0f / x))
-FAKE_ROUNDINGS1(sqrt, GEN_NAME2(sqrt, f)(x))
+FAKE_ROUNDINGS1(sqrt, ::sqrt(x))
 FAKE_ROUNDINGS1(rsqrt, GEN_NAME2(rsqrt, f)(x))
 
 FAKE_ROUNDINGS3(fma, GEN_NAME2(fma, f)(x, y, z))
@@ -491,7 +490,6 @@ DEFOPENCL1F_NATIVE(exp2)
 DEFOPENCL1F_NATIVE(exp)
 
 DEFOPENCL1F_NATIVE(recip)
-DEFOPENCL1F_NATIVE(sqrt)
 DEFOPENCL1F_NATIVE(rsqrt)
 
 DEFOPENCL2F_NATIVE(divide)
@@ -974,7 +972,7 @@ __DEF_FUN2(double, pow);
 __DEF_FUN2(double, remainder);
 __HIP_OVERLOAD1(bool, signbit)
 __HIP_OVERLOAD1(double, sinh)
-__DEF_FUN1(double, sqrt)
+__HIP_OVERLOAD1(double, sqrt)
 __HIP_OVERLOAD1(double, tan)
 __HIP_OVERLOAD1(double, tanh)
 __DEF_FUN1(double, tgamma)
