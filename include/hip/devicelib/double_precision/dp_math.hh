@@ -52,6 +52,7 @@ extern __device__ double trunc(double x);
 
 extern __device__ double sin(double x);
 extern __device__ double cos(double x);
+extern __device__ double tan(double x);
 extern __device__ double asin(double x);
 extern __device__ double acos(double x);
 extern __device__ double atan(double x);
@@ -83,6 +84,7 @@ using ::floor;
 using ::trunc;
 using ::sin;
 using ::cos;
+using ::tan;
 using ::asin;
 using ::acos;
 using ::atan;

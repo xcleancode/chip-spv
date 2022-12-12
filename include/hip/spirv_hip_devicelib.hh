@@ -335,7 +335,6 @@ DEFOPENCL1B(signbit)
 
 DEFOPENCL1F(sinpi)
 DEFOPENCL1F(sqrt)
-DEFOPENCL1F(tan)
 DEFOPENCL1F(tgamma)
 
 #if defined(__HIP_DEVICE_COMPILE__)
@@ -486,8 +485,6 @@ FAKE_ROUNDINGS1(rsqrt, GEN_NAME2(rsqrt, f)(x))
 
 FAKE_ROUNDINGS3(fma, GEN_NAME2(fma, f)(x, y, z))
 // FAKE_ROUNDINGS3(fmaf_ieee, GEN_NAME2(fmaf_ieee, f)(x, y, z))
-
-DEFOPENCL1F_NATIVE(tan)
 
 DEFOPENCL1F_NATIVE(exp10)
 DEFOPENCL1F_NATIVE(exp2)
@@ -978,7 +975,7 @@ __DEF_FUN2(double, remainder);
 __HIP_OVERLOAD1(bool, signbit)
 __HIP_OVERLOAD1(double, sinh)
 __DEF_FUN1(double, sqrt)
-__DEF_FUN1(double, tan)
+__HIP_OVERLOAD1(double, tan)
 __HIP_OVERLOAD1(double, tanh)
 __DEF_FUN1(double, tgamma)
 
