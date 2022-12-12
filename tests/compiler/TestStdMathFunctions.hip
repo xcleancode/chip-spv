@@ -76,6 +76,8 @@ DEF_UNARY_OP_KERNEL(callStdTanKernel, std::tan);
 DEF_UNARY_OP_KERNEL(callStdTanfKernel, std::tanf);
 DEF_UNARY_OP_KERNEL(callStdSqrtKernel, std::sqrt);
 DEF_UNARY_OP_KERNEL(callStdSqrtfKernel, std::sqrtf);
+DEF_UNARY_OP_KERNEL(callStdLgammaKernel, std::lgamma);
+DEF_UNARY_OP_KERNEL(callStdLgammafKernel, std::lgammaf);
 
 bool *b;
 signed char *sc;
@@ -226,4 +228,11 @@ void testSqrt() {
   callStdSqrtKernel<float><<<1, 1>>>(f);
   callStdSqrtfKernel<float><<<1, 1>>>(f);
   callStdSqrtKernel<double><<<1, 1>>>(d);
+}
+
+void testLgamma() {
+  callStdLgammaKernel<int><<<1, 1>>>(si);
+  callStdLgammaKernel<float><<<1, 1>>>(f);
+  callStdLgammafKernel<float><<<1, 1>>>(f);
+  callStdLgammaKernel<double><<<1, 1>>>(d);
 }
