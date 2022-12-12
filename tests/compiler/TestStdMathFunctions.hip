@@ -78,6 +78,8 @@ DEF_UNARY_OP_KERNEL(callStdSqrtKernel, std::sqrt);
 DEF_UNARY_OP_KERNEL(callStdSqrtfKernel, std::sqrtf);
 DEF_UNARY_OP_KERNEL(callStdLgammaKernel, std::lgamma);
 DEF_UNARY_OP_KERNEL(callStdLgammafKernel, std::lgammaf);
+DEF_UNARY_OP_KERNEL(callStdNearbyintKernel, std::nearbyint);
+DEF_UNARY_OP_KERNEL(callStdNearbyintfKernel, std::nearbyintf);
 
 bool *b;
 signed char *sc;
@@ -235,4 +237,11 @@ void testLgamma() {
   callStdLgammaKernel<float><<<1, 1>>>(f);
   callStdLgammafKernel<float><<<1, 1>>>(f);
   callStdLgammaKernel<double><<<1, 1>>>(d);
+}
+
+void testNearbyint() {
+  callStdNearbyintKernel<int><<<1, 1>>>(si);
+  callStdNearbyintKernel<float><<<1, 1>>>(f);
+  callStdNearbyintfKernel<float><<<1, 1>>>(f);
+  callStdNearbyintKernel<double><<<1, 1>>>(d);
 }
