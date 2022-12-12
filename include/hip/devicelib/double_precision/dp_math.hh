@@ -55,6 +55,9 @@ extern __device__ double cos(double x);
 extern __device__ double asin(double x);
 extern __device__ double acos(double x);
 extern __device__ double atan(double x);
+extern __device__ double sinh(double x);
+extern __device__ double cosh(double x);
+extern __device__ double tanh(double x);
 }
 
 static inline __device__ long int lrint(double x) {
@@ -83,6 +86,9 @@ using ::cos;
 using ::asin;
 using ::acos;
 using ::atan;
+using ::sinh;
+using ::cosh;
+using ::tanh;
 }
 
 // __device__ double acos(double x)

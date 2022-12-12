@@ -158,7 +158,6 @@ DEFOPENCL1F(cbrt)
 
 DEFOPENCL2F(copysign)
 
-DEFOPENCL1F(cosh)
 DEFOPENCL1F(cospi)
 
 DEFOPENCL1F(cyl_bessel_i1)
@@ -334,11 +333,9 @@ EXPORT double scalbn(double x, int n);
 
 DEFOPENCL1B(signbit)
 
-DEFOPENCL1F(sinh)
 DEFOPENCL1F(sinpi)
 DEFOPENCL1F(sqrt)
 DEFOPENCL1F(tan)
-DEFOPENCL1F(tanh)
 DEFOPENCL1F(tgamma)
 
 #if defined(__HIP_DEVICE_COMPILE__)
@@ -946,7 +943,7 @@ __DEF_FUN1(double, atanh)
 __DEF_FUN1(double, cbrt)
 __HIP_OVERLOAD1(double, ceil)
 __DEF_FUN2(double, copysign);
-__DEF_FUN1(double, cosh)
+__HIP_OVERLOAD1(double, cosh)
 __HIP_OVERLOAD1(double, erf)
 __HIP_OVERLOAD1(double, erfc)
 __DEF_FUN1(double, exp)
@@ -979,10 +976,10 @@ __DEF_FUN2(double, nextafter);
 __DEF_FUN2(double, pow);
 __DEF_FUN2(double, remainder);
 __HIP_OVERLOAD1(bool, signbit)
-__DEF_FUN1(double, sinh)
+__HIP_OVERLOAD1(double, sinh)
 __DEF_FUN1(double, sqrt)
 __DEF_FUN1(double, tan)
-__DEF_FUN1(double, tanh)
+__HIP_OVERLOAD1(double, tanh)
 __DEF_FUN1(double, tgamma)
 
 // define cmath functions with a float and an integer argument.
