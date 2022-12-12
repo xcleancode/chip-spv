@@ -104,6 +104,11 @@ static inline __device__ float tanhf(float x) { return ::tanh(x); }
 
 static inline __device__ float sqrtf(float x) { return ::sqrt(x); }
 
+static inline __device__ float nearbyintf(float x) {
+  return __builtin_nearbyintf(x);
+}
+static inline __device__ float nearbyint(float x) { return ::nearbyintf(x); }
+
 namespace std {
 using ::erf;
 using ::erff;
@@ -139,6 +144,8 @@ using ::sqrt;
 using ::sqrtf;
 using ::lgamma;
 using ::lgammaf;
+using ::nearbyint;
+using ::nearbyintf;
 } // namespace std
 
   // __device__ float acosf(float x)

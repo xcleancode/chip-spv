@@ -274,7 +274,6 @@ EXPORT float modff(float f, float *i);
 EXPORT double modf(double f, double *i);
 #endif
 
-DEFOPENCL1F(nearbyint)
 DEFOPENCL2F(nextafter)
 
 DEFOPENCL3F(norm3d)
@@ -966,7 +965,7 @@ __HIP_OVERLOAD1(double, log)
 __HIP_OVERLOAD1(double, log10)
 __HIP_OVERLOAD1(double, log2)
 __DEF_FUN1(double, logb)
-__DEF_FUN1(double, nearbyint);
+__HIP_OVERLOAD1(double, nearbyint);
 __DEF_FUN2(double, nextafter);
 __DEF_FUN2(double, pow);
 __DEF_FUN2(double, remainder);

@@ -73,6 +73,10 @@ static inline __device__ long int lround(double x) {
 static inline __device__ long long int llrint(double x) { return lrint(x); }
 static inline __device__ long long int llround(double x) { return lround(x); }
 
+static inline __device__ double nearbyint(double x) {
+  return __builtin_nearbyint(x);
+}
+
 namespace std {
 using ::erf;
 using ::erfc;
@@ -95,6 +99,7 @@ using ::cosh;
 using ::tanh;
 using ::sqrt;
 using ::lgamma;
+using ::nearbyint;
 }
 
 // __device__ double acos(double x)
