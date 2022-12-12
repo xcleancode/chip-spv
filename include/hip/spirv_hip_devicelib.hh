@@ -263,10 +263,7 @@ EXPORT float ldexpf(float x, int k);
 EXPORT double ldexp(double x, int k);
 #endif
 
-DEFOPENCL1F(log10)
-DEFOPENCL1F(log2)
 DEFOPENCL1F(logb)
-DEFOPENCL1F(log)
 
 #if defined(__HIP_DEVICE_COMPILE__)
 extern "C" {
@@ -500,10 +497,6 @@ DEFOPENCL1F_NATIVE(tan)
 DEFOPENCL1F_NATIVE(exp10)
 DEFOPENCL1F_NATIVE(exp2)
 DEFOPENCL1F_NATIVE(exp)
-
-DEFOPENCL1F_NATIVE(log10)
-DEFOPENCL1F_NATIVE(log2)
-DEFOPENCL1F_NATIVE(log)
 
 DEFOPENCL1F_NATIVE(recip)
 DEFOPENCL1F_NATIVE(sqrt)
@@ -979,9 +972,9 @@ __HIP_OVERLOAD2(bool, islessgreater);
 __HIP_OVERLOAD1(bool, isnan);
 //__HIP_OVERLOAD1(bool, isnormal)
 __HIP_OVERLOAD2(bool, isunordered);
-__DEF_FUN1(double, log)
-__DEF_FUN1(double, log10)
-__DEF_FUN1(double, log2)
+__HIP_OVERLOAD1(double, log)
+__HIP_OVERLOAD1(double, log10)
+__HIP_OVERLOAD1(double, log2)
 __DEF_FUN1(double, logb)
 __DEF_FUN1(double, nearbyint);
 __DEF_FUN2(double, nextafter);

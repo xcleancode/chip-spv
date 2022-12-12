@@ -38,6 +38,9 @@ extern __device__ float lgamma(float x);
 
 extern __device__ float expm1(float x);
 
+extern __device__ float log(float x);
+extern __device__ float log2(float x);
+extern __device__ float log10(float x);
 extern __device__ float log1p(float x);
 
 extern __device__ float ceil(float x);
@@ -68,6 +71,9 @@ static inline __device__ float lgammaf(float x) { return (lgamma(x)); };
 
 static inline __device__ float expm1f(float x) { return ::expm1(x); }
 
+static inline __device__ float logf(float x) { return ::log(x); }
+static inline __device__ float log2f(float x) { return ::log2(x); }
+static inline __device__ float log10f(float x) { return ::log10(x); }
 static inline __device__ float log1pf(float x) { return ::log1p(x); }
 
 static inline __device__ float ceilf(float x) { return ::ceil(x); }
@@ -82,6 +88,12 @@ static inline __device__ float atanf(float x) { return ::atan(x); }
 
 namespace std {
 using ::expm1;
+using ::log;
+using ::logf;
+using ::log2;
+using ::log2f;
+using ::log10;
+using ::log10f;
 using ::log1p;
 using ::ceil;
 using ::ceilf;

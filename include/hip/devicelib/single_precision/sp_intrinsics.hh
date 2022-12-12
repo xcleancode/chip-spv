@@ -26,6 +26,10 @@
 #include <hip/devicelib/macros.hh>
 #include <hip/devicelib/single_precision/sp_math.hh>
 
+static inline __device__ float __logf(float x) { return ::log(x); }
+static inline __device__ float __log2f(float x) { return ::log2(x); }
+static inline __device__ float __log10f(float x) { return ::log10(x); }
+
 static inline __device__ float __sinf(float x) { return ::sin(x); }
 static inline __device__ float __cosf(float x) { return ::cos(x); }
 
