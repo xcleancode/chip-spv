@@ -74,6 +74,8 @@ DEF_UNARY_OP_KERNEL(callStdTanhKernel, std::tanh);
 DEF_UNARY_OP_KERNEL(callStdTanhfKernel, std::tanhf);
 DEF_UNARY_OP_KERNEL(callStdTanKernel, std::tan);
 DEF_UNARY_OP_KERNEL(callStdTanfKernel, std::tanf);
+DEF_UNARY_OP_KERNEL(callStdSqrtKernel, std::sqrt);
+DEF_UNARY_OP_KERNEL(callStdSqrtfKernel, std::sqrtf);
 
 bool *b;
 signed char *sc;
@@ -217,4 +219,11 @@ void testTan() {
   callStdTanKernel<float><<<1, 1>>>(f);
   callStdTanfKernel<float><<<1, 1>>>(f);
   callStdTanKernel<double><<<1, 1>>>(d);
+}
+
+void testSqrt() {
+  callStdSqrtKernel<int><<<1, 1>>>(si);
+  callStdSqrtKernel<float><<<1, 1>>>(f);
+  callStdSqrtfKernel<float><<<1, 1>>>(f);
+  callStdSqrtKernel<double><<<1, 1>>>(d);
 }
