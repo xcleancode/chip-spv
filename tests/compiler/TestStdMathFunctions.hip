@@ -66,6 +66,12 @@ DEF_UNARY_OP_KERNEL(callStdErfKernel, std::erf);
 DEF_UNARY_OP_KERNEL(callStdErffKernel, std::erff);
 DEF_UNARY_OP_KERNEL(callStdErfcKernel, std::erfc);
 DEF_UNARY_OP_KERNEL(callStdErfcfKernel, std::erfcf);
+DEF_UNARY_OP_KERNEL(callStdCoshKernel, std::cosh);
+DEF_UNARY_OP_KERNEL(callStdCoshfKernel, std::coshf);
+DEF_UNARY_OP_KERNEL(callStdSinhKernel, std::sinh);
+DEF_UNARY_OP_KERNEL(callStdSinhfKernel, std::sinhf);
+DEF_UNARY_OP_KERNEL(callStdTanhKernel, std::tanh);
+DEF_UNARY_OP_KERNEL(callStdTanhfKernel, std::tanhf);
 
 bool *b;
 signed char *sc;
@@ -181,4 +187,25 @@ void testErfc() {
   callStdErfcKernel<float><<<1, 1>>>(f);
   callStdErfcfKernel<float><<<1, 1>>>(f);
   callStdErfcKernel<double><<<1, 1>>>(d);
+}
+
+void testCosh() {
+  callStdCoshKernel<int><<<1, 1>>>(si);
+  callStdCoshKernel<float><<<1, 1>>>(f);
+  callStdCoshfKernel<float><<<1, 1>>>(f);
+  callStdCoshKernel<double><<<1, 1>>>(d);
+}
+
+void testSinh() {
+  callStdSinhKernel<int><<<1, 1>>>(si);
+  callStdSinhKernel<float><<<1, 1>>>(f);
+  callStdSinhfKernel<float><<<1, 1>>>(f);
+  callStdSinhKernel<double><<<1, 1>>>(d);
+}
+
+void testTanh() {
+  callStdTanhKernel<int><<<1, 1>>>(si);
+  callStdTanhKernel<float><<<1, 1>>>(f);
+  callStdTanhfKernel<float><<<1, 1>>>(f);
+  callStdTanhKernel<double><<<1, 1>>>(d);
 }
