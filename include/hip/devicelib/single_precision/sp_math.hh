@@ -39,6 +39,7 @@ extern __device__ float lgamma(float x);
 extern __device__ float erf(float x);
 extern __device__ float erfc(float x);
 
+extern __device__ float exp(float x);
 extern __device__ float expm1(float x);
 
 extern __device__ float log(float x);
@@ -81,6 +82,7 @@ static inline __device__ float lgammaf(float x) { return (lgamma(x)); };
 static inline __device__ float erff(float x) { return ::erf(x); }
 static inline __device__ float erfcf(float x) { return ::erfc(x); }
 
+static inline __device__ float expf(float x) { return ::exp(x); }
 static inline __device__ float expm1f(float x) { return ::expm1(x); }
 
 static inline __device__ float logf(float x) { return ::log(x); }
@@ -114,6 +116,8 @@ using ::erf;
 using ::erff;
 using ::erfc;
 using ::erfcf;
+using ::exp;
+using ::expf;
 using ::expm1;
 using ::log;
 using ::logf;

@@ -39,6 +39,7 @@ extern __device__ double lgamma(double x);
 extern __device__ double erf(double x);
 extern __device__ double ercf(double x);
 
+extern __device__ double exp(double x);
 extern __device__ double expm1(double x);
 
 extern __device__ double log(double x);
@@ -80,6 +81,7 @@ static inline __device__ double nearbyint(double x) {
 namespace std {
 using ::erf;
 using ::erfc;
+using ::exp;
 using ::expm1;
 using ::log;
 using ::log2;

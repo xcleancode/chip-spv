@@ -31,6 +31,8 @@ extern "C++" {
 
 extern __device__ api_half rint(api_half x);
 
+extern __device__ api_half exp(api_half x);
+
 extern __device__ api_half log(api_half x);
 extern __device__ api_half log2(api_half x);
 extern __device__ api_half log10(api_half x);
@@ -46,6 +48,7 @@ extern __device__ api_half sqrt(api_half x);
 }
 
 static inline __device__ api_half rint_h(api_half x) { return rint(x); }
+static inline __device__ api_half exp_h(api_half x) { return ::exp(x); }
 static inline __device__ api_half log_h(api_half x) { return ::log(x); }
 static inline __device__ api_half log2_h(api_half x) { return ::log2(x); }
 static inline __device__ api_half log10_h(api_half x) { return ::log10(x); }

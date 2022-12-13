@@ -169,7 +169,6 @@ DEFOPENCL1F(erfinv)
 
 DEFOPENCL1F(exp10)
 DEFOPENCL1F(exp2)
-DEFOPENCL1F(exp)
 DEFOPENCL1F(fabs)
 DEFOPENCL2F(fdim)
 
@@ -486,7 +485,6 @@ FAKE_ROUNDINGS3(fma, GEN_NAME2(fma, f)(x, y, z))
 
 DEFOPENCL1F_NATIVE(exp10)
 DEFOPENCL1F_NATIVE(exp2)
-DEFOPENCL1F_NATIVE(exp)
 
 DEFOPENCL1F_NATIVE(recip)
 DEFOPENCL1F_NATIVE(rsqrt)
@@ -940,7 +938,7 @@ __DEF_FUN2(double, copysign);
 __HIP_OVERLOAD1(double, cosh)
 __HIP_OVERLOAD1(double, erf)
 __HIP_OVERLOAD1(double, erfc)
-__DEF_FUN1(double, exp)
+__HIP_OVERLOAD1(double, exp)
 __DEF_FUN1(double, exp2)
 __DEF_FUN1(double, fabs)
 __DEF_FUN2(double, fdim);
