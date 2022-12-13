@@ -46,6 +46,14 @@ template <class T> __global__ void callStdCosKernel(T *Data) {
   *Data = std::cos(*Data);
 }
 
+template <class T> __global__ void callStdLrintKernel(long *Out, T *In) {
+  *Out = std::lrint(*In);
+}
+
+template <class T> __global__ void callStdLrintfKernel(long *Out, T *In) {
+  *Out = std::lrintf(*In);
+}
+
 #define DEF_UNARY_OP_KERNEL(NAME, OP)                                          \
   template <class T> __global__ void NAME(T *Data) { *Data = OP(*Data); }
 
@@ -253,4 +261,11 @@ void testExp() {
   callStdExpKernel<float><<<1, 1>>>(f);
   callStdExpfKernel<float><<<1, 1>>>(f);
   callStdExpKernel<double><<<1, 1>>>(d);
+}
+
+void testLrint() {
+  callStdLrintKernel<int><<<1, 1>>>(sl, si);
+  callStdLrintKernel<float><<<1, 1>>>(sl, f);
+  callStdLrintfKernel<float><<<1, 1>>>(sl, f);
+  callStdLrintKernel<double><<<1, 1>>>(sl, d);
 }
