@@ -991,6 +991,10 @@ EXPORT double min(double x, double y) { return fmin(x, y); }
 __HIP_OVERLOAD2(double, max)
 __HIP_OVERLOAD2(double, min)
 
+namespace std {
+__HIP_OVERLOAD1(long, lrint);
+}
+
 #pragma pop_macro("__DEF_FLOAT_FUN")
 #pragma pop_macro("__DEF_FLOAT_FUN2")
 #pragma pop_macro("__DEF_FLOAT_FUN2I")

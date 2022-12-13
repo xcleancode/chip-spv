@@ -67,6 +67,9 @@ extern __device__ float sqrt(float x);
 static inline __device__ float rintf(float x) { return rint(x); }
 static inline __device__ float roundf(float x) { return round(x); }
 
+static inline __device__ long int lrint(float x) {
+  return convert_long(rint(x));
+}
 static inline __device__ long int lrintf(float x) {
   return convert_long(rint(x));
 }
@@ -150,6 +153,8 @@ using ::lgamma;
 using ::lgammaf;
 using ::nearbyint;
 using ::nearbyintf;
+using ::lrint;
+using ::lrintf;
 } // namespace std
 
   // __device__ float acosf(float x)
