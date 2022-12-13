@@ -80,6 +80,8 @@ DEF_UNARY_OP_KERNEL(callStdLgammaKernel, std::lgamma);
 DEF_UNARY_OP_KERNEL(callStdLgammafKernel, std::lgammaf);
 DEF_UNARY_OP_KERNEL(callStdNearbyintKernel, std::nearbyint);
 DEF_UNARY_OP_KERNEL(callStdNearbyintfKernel, std::nearbyintf);
+DEF_UNARY_OP_KERNEL(callStdExpKernel, std::exp);
+DEF_UNARY_OP_KERNEL(callStdExpfKernel, std::expf);
 
 bool *b;
 signed char *sc;
@@ -244,4 +246,11 @@ void testNearbyint() {
   callStdNearbyintKernel<float><<<1, 1>>>(f);
   callStdNearbyintfKernel<float><<<1, 1>>>(f);
   callStdNearbyintKernel<double><<<1, 1>>>(d);
+}
+
+void testExp() {
+  callStdExpKernel<int><<<1, 1>>>(si);
+  callStdExpKernel<float><<<1, 1>>>(f);
+  callStdExpfKernel<float><<<1, 1>>>(f);
+  callStdExpKernel<double><<<1, 1>>>(d);
 }
