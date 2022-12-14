@@ -62,6 +62,8 @@ extern __device__ float cosh(float x);
 extern __device__ float tanh(float x);
 
 extern __device__ float sqrt(float x);
+
+extern __device__ float copysign(float x, float y);
 }
 
 static inline __device__ float rintf(float x) { return rint(x); }
@@ -114,6 +116,10 @@ static inline __device__ float nearbyintf(float x) {
 }
 static inline __device__ float nearbyint(float x) { return ::nearbyintf(x); }
 
+static inline __device__ float copysignf(float x, float y) {
+  return ::copysign(x, y);
+}
+
 namespace std {
 using ::erf;
 using ::erff;
@@ -155,6 +161,8 @@ using ::nearbyint;
 using ::nearbyintf;
 using ::lrint;
 using ::lrintf;
+using ::copysign;
+using ::copysignf;
 } // namespace std
 
   // __device__ float acosf(float x)

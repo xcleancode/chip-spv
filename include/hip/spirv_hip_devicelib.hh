@@ -156,8 +156,6 @@ DEFOPENCL2F(atan2)
 DEFOPENCL1F(atanh)
 DEFOPENCL1F(cbrt)
 
-DEFOPENCL2F(copysign)
-
 DEFOPENCL1F(cospi)
 
 DEFOPENCL1F(cyl_bessel_i1)
@@ -934,7 +932,7 @@ __DEF_FUN2(double, atan2);
 __DEF_FUN1(double, atanh)
 __DEF_FUN1(double, cbrt)
 __HIP_OVERLOAD1(double, ceil)
-__DEF_FUN2(double, copysign);
+__HIP_OVERLOAD2(double, copysign);
 __HIP_OVERLOAD1(double, cosh)
 __HIP_OVERLOAD1(double, erf)
 __HIP_OVERLOAD1(double, erfc)
