@@ -64,6 +64,8 @@ extern __device__ double tanh(double x);
 extern __device__ double sqrt(double x);
 
 extern __device__ double copysign(double x, double y);
+
+extern __device__ double nextafter(double x, double y);
 }
 
 static inline __device__ long int lrint(double x) {
@@ -105,6 +107,7 @@ using ::sqrt;
 using ::lgamma;
 using ::nearbyint;
 using ::copysign;
+using ::nextafter;
 }
 
 // __device__ double acos(double x)

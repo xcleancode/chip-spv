@@ -64,6 +64,8 @@ extern __device__ float tanh(float x);
 extern __device__ float sqrt(float x);
 
 extern __device__ float copysign(float x, float y);
+
+extern __device__ float nextafter(float x, float y);
 }
 
 static inline __device__ float rintf(float x) { return rint(x); }
@@ -120,6 +122,10 @@ static inline __device__ float copysignf(float x, float y) {
   return ::copysign(x, y);
 }
 
+static inline __device__ float nextafterf(float x, float y) {
+  return ::nextafter(x, y);
+}
+
 namespace std {
 using ::erf;
 using ::erff;
@@ -163,6 +169,8 @@ using ::lrint;
 using ::lrintf;
 using ::copysign;
 using ::copysignf;
+using ::nextafter;
+using ::nextafterf;
 } // namespace std
 
   // __device__ float acosf(float x)
