@@ -91,6 +91,15 @@ DEF_UNARY_OP_KERNEL(callStdNearbyintfKernel, std::nearbyintf);
 DEF_UNARY_OP_KERNEL(callStdExpKernel, std::exp);
 DEF_UNARY_OP_KERNEL(callStdExpfKernel, std::expf);
 
+template <class OutT, class LhsT = OutT, class RhsT = OutT>
+__global__ void callStdCopysignKernel(OutT *Out, LhsT *Lhs, RhsT *Rhs) {
+  *Out = std::copysign(*Lhs, *Rhs);
+}
+
+__global__ void callStdCopysignfKernel(float *Out, float *Lhs, float *Rhs) {
+  *Out = std::copysignf(*Lhs, *Rhs);
+}
+
 bool *b;
 signed char *sc;
 unsigned char *uc;
@@ -98,8 +107,8 @@ signed short *ss;
 unsigned short *us;
 signed int *si, *si2;
 signed long *sl;
-float *f, *f2;
-double *d;
+float *f, *f2, *f3;
+double *d, *d2, *d3;
 
 void testAbs() {
   callStdAbsKernel<<<1, 1>>>(sc);
@@ -268,4 +277,14 @@ void testLrint() {
   callStdLrintKernel<float><<<1, 1>>>(sl, f);
   callStdLrintfKernel<float><<<1, 1>>>(sl, f);
   callStdLrintKernel<double><<<1, 1>>>(sl, d);
+}
+
+void testCopysign() {
+  callStdCopysignKernel<float><<<1, 1>>>(f, f2, f3);
+  callStdCopysignfKernel<<<1, 1>>>(f, f2, f3);
+  callStdCopysignKernel<double><<<1, 1>>>(d, d2, d3);
+
+  // Mixed int/floatdouble arguments calls do not compile due to clash with
+  // libstdc++.
+  // callStdCopysignKernel<double /*<--*/, float, int><<<1, 1>>>(d, f, si);
 }
