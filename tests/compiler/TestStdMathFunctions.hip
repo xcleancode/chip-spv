@@ -100,6 +100,16 @@ __global__ void callStdCopysignfKernel(float *Out, float *Lhs, float *Rhs) {
   *Out = std::copysignf(*Lhs, *Rhs);
 }
 
+template <class OutT, class LhsT = OutT, class RhsT = OutT>
+__global__ void callStdNextafterKernel(OutT *Out, LhsT *Lhs, RhsT *Rhs) {
+  *Out = std::nextafter(*Lhs, *Rhs);
+}
+
+__global__ void callStdNextafterfKernel(float *Out, float *Lhs, float *Rhs) {
+  *Out = std::nextafterf(*Lhs, *Rhs);
+}
+
+
 bool *b;
 signed char *sc;
 unsigned char *uc;
@@ -287,4 +297,13 @@ void testCopysign() {
   // Mixed int/floatdouble arguments calls do not compile due to clash with
   // libstdc++.
   // callStdCopysignKernel<double /*<--*/, float, int><<<1, 1>>>(d, f, si);
+}
+
+void testNextafter() {
+  callStdNextafterKernel<float><<<1, 1>>>(f, f2, f3);
+  callStdNextafterfKernel<<<1, 1>>>(f, f2, f3);
+  callStdNextafterKernel<double><<<1, 1>>>(d, d2, d3);
+
+  // TODO: Add support for mixed integer/float/double argument calls.
+  // callStdNextafterKernel<double /*<--*/, float, int><<<1, 1>>>(d, f, si);
 }
