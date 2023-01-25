@@ -20,7 +20,7 @@
 #include "HipPrintf.h"
 #include "HipGlobalVariables.h"
 #include "HipTextureLowering.h"
-#include "HipEmitLoweredNames.h"
+#include "HipTaskSync.h"
 
 #include "llvm/Passes/PassBuilder.h"
 #include "llvm/Passes/PassPlugin.h"
@@ -28,7 +28,6 @@
 #include "llvm/Transforms/Scalar/DCE.h"
 #include "llvm/Transforms/IPO/GlobalDCE.h"
 #include "llvm/Transforms/Scalar/SROA.h"
-#include "llvm/Transforms/Scalar/InferAddressSpaces.h"
 
 
 using namespace llvm;
@@ -73,14 +72,10 @@ public:
     // Altering OpenCL metadata probably does not invalidate any analyses.
     return PreservedAnalyses::all();
   }
-
   static bool isRequired() { return true; }
 };
 
 static void addFullLinkTimePasses(ModulePassManager &MPM) {
-  /// For extracting name expression to lowered name expressions (hiprtc).
-  MPM.addPass(HipEmitLoweredNamesPass());
-
   // Remove attributes that may prevent the device code from being optimized.
   MPM.addPass(RemoveNoInlineOptNoneAttrsPass());
 
@@ -100,6 +95,8 @@ static void addFullLinkTimePasses(ModulePassManager &MPM) {
 
   MPM.addPass(HipTextureLoweringPass());
 
+  MPM.addPass(HipTaskSyncPass());
+  
   // TODO: Update printf pass for HIP-Clang 14+. It now triggers an assert:
   //
   //  Assertion `isa<X>(Val) && "cast<Ty>() argument of incompatible type!"'
@@ -116,7 +113,6 @@ static void addFullLinkTimePasses(ModulePassManager &MPM) {
   MPM.addPass(createModuleToFunctionPassAdaptor(DCEPass()));
   MPM.addPass(GlobalDCEPass());
 
-  MPM.addPass(createModuleToFunctionPassAdaptor(InferAddressSpacesPass(4)));
   MPM.addPass(HipFixOpenCLMDPass());
 }
 
