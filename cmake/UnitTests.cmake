@@ -391,6 +391,26 @@ list(APPEND CPU_OPENCL_FAILED_TESTS "Unit_hipMallocPitch_KernelLaunch - float") 
 list(APPEND CPU_OPENCL_FAILED_TESTS "Unit_hipMallocPitch_KernelLaunch - double") # Failed
 list(APPEND CPU_OPENCL_FAILED_TESTS "Unit_hipGraphAddHostNode_ClonedGraphwithHostNode") # Failed
 
+# broken tests, they all try to write outside allocated memory;
+# valgrind + pocl shows:
+#
+#==11492== Invalid write of size 1
+#==11492==    at 0x5605B83: pocl_fill_aligned_buf_with_pattern (pocl_util.c:2590)
+#==11492==    by 0x562B1F5: pocl_driver_svm_fill (common_driver.c:444)
+#==11492==    by 0x5626EBF: pocl_exec_command (common.c:693)
+#==11492==    by 0x562205F: pthread_scheduler_get_work (pthread_scheduler.c:529)
+#==11492==    by 0x56221B7: pocl_pthread_driver_thread (pthread_scheduler.c:588)
+#==11492==    by 0x5009B42: start_thread (pthread_create.c:442)
+#==11492==    by 0x509ABB3: clone (clone.S:100)
+#==11492==  Address 0x114baf00 is 0 bytes after a block of size 16,384 alloc'd
+#==11492==    by 0x561EE67: pocl_basic_svm_alloc (basic.c:841)
+#==11492==    by 0x561411A: POclSVMAlloc (clSVMAlloc.c:98)
+#==11492==    by 0x4966168: SVMemoryRegion::allocate(unsigned long) (source/chip-spv/src/backend>
+list(APPEND CPU_OPENCL_FAILED_TESTS "Unit_hipMemset2D_BasicFunctional")
+list(APPEND CPU_OPENCL_FAILED_TESTS "Unit_hipMemset2DAsync_BasicFunctional")
+list(APPEND CPU_OPENCL_FAILED_TESTS "Unit_hipMemset2DAsync_WithKernel")
+list(APPEND CPU_OPENCL_FAILED_TESTS "Unit_hipMemset2DAsync_MultiThread")
+list(APPEND CPU_OPENCL_FAILED_TESTS "Unit_hipMemsetFunctional_ZeroValue_2D")
 
 # iGPU OpenCL Unit Test Failures
 list(APPEND IGPU_OPENCL_FAILED_TESTS "cuda-simpleCallback") # SEGFAULT
